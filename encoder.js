@@ -32,53 +32,25 @@ class BmpEncoder{
 
 	encode(){
 		let buf = new ArrayBuffer(this.offset+this.rgbSize)
-		// let u = new Uint8Array(buf)
 		let dv = new DataView(buf)
 		this.pos = 0;
 
 		dv.setUint8(this.pos, 66); this.pos+=1;
 		dv.setUint8(this.pos, 77); this.pos+=1;
 
-		// tempBuffer.writeUInt32LE(this.fileSize,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.fileSize, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.reserved,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.reserved, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.offset,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.offset, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.headerInfoSize,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.headerInfoSize, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.width,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.width, true); this.pos+=4;
-
-		// tempBuffer.writeInt32LE(-this.height,this.pos);this.pos+=4;
 		dv.setInt32(this.pos, -this.height, true); this.pos+=4;
-
-		// tempBuffer.writeUInt16LE(this.planes,this.pos);this.pos+=2;
 		dv.setUint16(this.pos, this.planes, true); this.pos+=2;
-
-		// tempBuffer.writeUInt16LE(this.bitPP,this.pos);this.pos+=2;
 		dv.setUint16(this.pos, this.bitPP, true); this.pos+=2;
-
-		// tempBuffer.writeUInt32LE(this.compress,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.compress, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.rgbSize,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.rgbSize, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.hr,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.hr, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.vr,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.vr, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.colors,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.colors, true); this.pos+=4;
-
-		// tempBuffer.writeUInt32LE(this.importantColors,this.pos);this.pos+=4;
 		dv.setUint32(this.pos, this.importantColors, true); this.pos+=4;
 	
 		var i=0;
@@ -91,19 +63,14 @@ class BmpEncoder{
 				dv.setUint8(p, this.buffer[i++])
 				dv.setUint8(p+1, this.buffer[i++])
 				dv.setUint8(p+2, this.buffer[i++])
-				// tempBuffer[p]= this.buffer[i++];//b
-				// tempBuffer[p+1] = this.buffer[i++];//g
-				// tempBuffer[p+2]  = this.buffer[i++];//r
 			}
 			if(this.extraBytes>0){
 				var fillOffset = this.pos+y*rowBytes+this.width*3;
-				// tempBuffer.fill(0,fillOffset,fillOffset+this.extraBytes);
 				for(let i; i < this.extraBytes; i++){
 					dv.setUint8(fillOffset + i)
 				}
 			}
 		}
-	
 		return buf;
 	}
 }
