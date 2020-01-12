@@ -69,21 +69,21 @@ class BmpEncoder {
     dv.setUint32(this.pos, this.importantColors, true);
     this.pos += 4;
 
-    var i = 0;
-    var rowBytes = 3 * this.width + this.extraBytes;
+    let i = 0;
+    const rowBytes = 3 * this.width + this.extraBytes;
 
-    for (var y = 0; y < this.height; y++) {
-      for (var x = 0; x < this.width; x++) {
-        var p = this.pos + y * rowBytes + x * 3;
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        const p = this.pos + y * rowBytes + x * 3;
         i++; //a
         dv.setUint8(p, this.buffer[i++]);
         dv.setUint8(p + 1, this.buffer[i++]);
         dv.setUint8(p + 2, this.buffer[i++]);
       }
       if (this.extraBytes > 0) {
-        var fillOffset = this.pos + y * rowBytes + this.width * 3;
-        for (let i; i < this.extraBytes; i++) {
-          dv.setUint8(fillOffset + i);
+        const fillOffset = this.pos + y * rowBytes + this.width * 3;
+        for (let pos; pos < this.extraBytes; pos++) {
+          dv.setUint8(fillOffset + pos);
         }
       }
     }
@@ -93,8 +93,8 @@ class BmpEncoder {
 
 export function encode(imgData, quality) {
   if (typeof quality === "undefined") quality = 100;
-  var encoder = new BmpEncoder(imgData);
-  var data = encoder.encode();
+  const encoder = new BmpEncoder(imgData);
+  const data = encoder.encode();
   return {
     data: data,
     width: imgData.width,
