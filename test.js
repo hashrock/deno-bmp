@@ -10,5 +10,4 @@ var bmpData = {
     height //Number
 };
 var rawData = encode(bmpData); //defaults to no compression
-
 await Deno.writeFile("./image.bmp", rawData);
