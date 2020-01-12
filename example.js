@@ -15,8 +15,6 @@ for(let y = 0; y < height; y++){
   }
 }
 
-// console.log(data)
-
 const bmpData = {
     data, //Buffer
     width, //Number
