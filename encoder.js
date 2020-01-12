@@ -30,18 +30,12 @@ class BmpEncoder{
 		this.importantColors = 0;
 	}
 
-	writeUInt32LE(){
-
-	}
-	writeInt32LE(){}
-
 	encode(){
-		const buf = new ArrayBuffer(this.offset+this.rgbSize)
-		const dv = new DataView(buf)
-		// var tempBuffer = new Buffer();
+		let buf = new ArrayBuffer(this.offset+this.rgbSize)
+		// let u = new Uint8Array(buf)
+		let dv = new DataView(buf)
 		this.pos = 0;
 
-		// console.log(dv.setUint16)
 		dv.setUint8(this.pos, 66); this.pos+=1;
 		dv.setUint8(this.pos, 77); this.pos+=1;
 
